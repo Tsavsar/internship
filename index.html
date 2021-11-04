@@ -4,32 +4,66 @@
 
     </head>
 <body>
-    <body>
-        <div class="container">
-          <div id="dropper" class="drop">
-            <select class="country inputs">
-              <option value="">Select a country</option>
-              <option value="us">United States</option>
-              <option value="ca">Canada</option>
-            </select>
-            <select class="industry inputs">
-              <option value="">Select an industry</option>
-              <option value="trans">Transportation</option>
-              <option value="web">Web Development</option>
-              <option value="food">Food Services</option>
-            </select>
-          <select class="city">
-          <option value="">Select a city</option>
+    
+
+        
+        
+       
+        Country: <select name="Country" id="Country">
+              <option value="" selected="selected">Select Country</option>
           </select>
-          </div>
-          <br>
-          <h3 id="city"><h3>
-        </div>
+        
+        State: <select name="State" id="State">
+            <option value="" selected="selected">Please select Country first</option>
+
+</select>
+        
+        LGA: <select name="LGA" id="LGA">
+
+        <option value="" selected="selected">Please select State first</option>
+          </select>
+         
       </body>
 
 <script>
 
-
+var CountryObject = {
+  "Nigeria": {
+    "FCT": ["Bwari", "Kuje", "Abaji", "Kwali"],
+    "Ebonyi": ["Ohaukwu", "Izzi", "Ivo", "Ikwo"],
+    "Benue": ["Gboko", "Buma", "Logo", "Makurdi"]    
+  },
+  "Japan": {
+    "Tokyo": ["Shibuya", "Kyoto"],
+    "Fukushima": ["Isesaki", "Iwaki"]
+  }
+}
+window.onload = function() {
+  var CountrySel = document.getElementById("Country");
+  var StateSel = document.getElementById("State");
+  var LGASel = document.getElementById("LGA");
+  for (var x in CountryObject) {
+    CountrySel.options[CountrySel.options.length] = new Option(x, x);
+  }
+  CountrySel.onchange = function() {
+   
+    LGASel.length = 1;
+    StateSel.length = 1;
+    
+    for (var y in CountryObject[this.value]) {
+      StateSel.options[StateSel.options.length] = new Option(y, y);
+    }
+  }
+  StateSel.onchange = function() {
+   
+    LGASel.length = 1;
+   
+    var z = CountryObject[CountrySel.value][this.value];
+    for (var i = 0; i < z.length; i++) {
+      LGASel.options[LGASel.options.length] = new Option(z[i], z[i]);
+    }
+  }
+}
 
 /*
 
