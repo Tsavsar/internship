@@ -124,11 +124,13 @@
     </div>
 
     <script>
+        //declear the variables using their ids
         const form = document.getElementById('form');
         const username = document.getElementById('username');
         const email = document.getElementById('email');
         const password = document.getElementById('password');
 
+        //prevent the default by calling the 'checkinputs' function
         form.addEventListener('submit', (e) => {
             e.preventDefault();
 
@@ -136,12 +138,18 @@
         });
 
 
+        //function to determine the validity of the users input
         function checkInputs(){
 
+            //add trim to remove any spaces added my the user
             const usernameValue = username.value.trim();
             const emailValue = email.value.trim();
             const passwordValue = password.value.trim();
 
+
+            //if statement with conditions to determine the validity of the input
+            //setError fuction is called for values that are not accepted while 
+            //setSuccessFor function is callled when an acceptable input is given
             if(usernameValue === ''){
                 setErrorFor(username, 'Username cannot be blank');
             }else{
@@ -164,20 +172,26 @@
         }    
             
         
-        
+        //setErrorFor function when called triggers the error message
+        //it taregets the input tag and small tag
         function setErrorFor(input, message){
             const formcontrol = input.parentElement;
             const small = formcontrol.querySelector('small');
 
+            //small tag is now decleared as message
             small.innerText = message;
 
             formcontrol.className = 'form-control error';
         }
 
+        //function 'isEmail' provides the needed positions and acceptable characters for the email
         function isEmail(email){
+
+            //these are regex used to match character combinations in strings.
             return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email);
         }
 
+        //setSuccessFor function confirms the input as valid and acceptable
         function setSuccessFor(input){
             const formcontrol = input.parentElement;
             formcontrol.className = 'form-control success';
